@@ -9,13 +9,16 @@ const EditTodo = ({ todo }) => {
     e.preventDefault();
     try {
       const body = { description };
-      const response = await fetch(`http://localhost:5000/todos/${todo.todo_id}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json'},
-          body: JSON.stringify(body)
-      })
+      const response = await fetch(
+        `http://localhost:5000/todos/${todo.todo_id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        }
+      );
 
-      console.log(response)
+      window.location = "/";
     } catch (err) {
       console.error(err.message);
     }
@@ -36,12 +39,21 @@ const EditTodo = ({ todo }) => {
       id = id10
       */}
 
-      <div class="modal" id={`id${todo.todo_id}`}>
+      <div
+        class="modal"
+        id={`id${todo.todo_id}`}
+        onClick={() => setDescription(todo.description)}
+      >
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title"> Edit Todo</h4>
-              <button type="button" class="close" data-dismiss="modal">
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                onClick={() => setDescription(todo.description)}
+              >
                 &times;
               </button>
             </div>
@@ -64,7 +76,12 @@ const EditTodo = ({ todo }) => {
               >
                 Edit
               </button>
-              <button type="button" class="btn btn-danger" data-dismiss="modal">
+              <button
+                type="button"
+                class="btn btn-danger"
+                data-dismiss="modal"
+                onClick={() => setDescription(todo.description)}
+              >
                 Close
               </button>
             </div>
